@@ -11,6 +11,11 @@ try:
     HAS_RF = True
 except ImportError:
     HAS_RF = False
+try:
+    from plone.app.event.dx.behaviors import IEventBasic
+    HAS_PAE = True
+except ImportError:
+    HAS_PAE = False
 from plone.app.widgets.dx import DatetimeWidget
 from plone.app.widgets.dx import SelectWidget
 from plone.app.widgets.dx import Select2Widget
@@ -69,4 +74,19 @@ if HAS_RF:
     def RelatedItemsFieldWidget(field, request):
         widget = FieldWidget(field, RelatedItemsWidget(request))
         widget.ajax_vocabulary = 'plone.app.vocabularies.Catalog'
+        return widget
+
+
+if HAS_PAE:
+    @adapter(getSpecification(IEventBasic['start']), IWidgetsLayer)
+    @implementer(IFieldWidget)
+    def StartFieldWidget(field, request):
+        widget = FieldWidget(field, DatetimeWidget(request))
+        return widget
+
+
+    @adapter(getSpecification(IEventBasic['end']), IWidgetsLayer)
+    @implementer(IFieldWidget)
+    def EndFieldWidget(field, request):
+        widget = FieldWidget(field, DatetimeWidget(request))
         return widget

@@ -180,15 +180,21 @@
     <adapter factory=".dx.RelatedItemsDataConverter" />
 
     <!-- override metadata widgets -->
-    <adapter factory=".dx_bbb.SubjectsFieldWidget" />
+    <!--adapter factory=".dx_bbb.SubjectsFieldWidget" /-->
     <adapter factory=".dx_bbb.LanguageFieldWidget" />
     <adapter factory=".dx_bbb.EffectiveDateFieldWidget" />
     <adapter factory=".dx_bbb.ExpirationDateFieldWidget" />
-    <adapter factory=".dx_bbb.ContributorsFieldWidget" />
-    <adapter factory=".dx_bbb.CreatorsFieldWidget" />
+    <!--adapter factory=".dx_bbb.ContributorsFieldWidget" /-->
+    <!--adapter factory=".dx_bbb.CreatorsFieldWidget" /-->
 
     <configure zcml:condition="installed plone.app.relationfield">
       <adapter factory=".dx_bbb.RelatedItemsFieldWidget" />
+    </configure>
+
+    <!-- override plone.app.event specific widgets -->
+    <configure zcml:condition="installed plone.app.event">
+        <adapter factory=".dx_bbb.StartFieldWidget" />
+        <adapter factory=".dx_bbb.EndFieldWidget" />
     </configure>
 
     <!-- override contenttypes specific widgets -->
