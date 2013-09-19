@@ -5,7 +5,9 @@ Changelog
 1.3.4 (unreleased)
 ------------------
 
-- no updates
+- Added wiring for p.a.event start and end field.
+  Depends on some changes in p.a.event
+  [agitator]
 
 
 1.3.3 (2013-09-11)
